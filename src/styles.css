@@ -1,0 +1,33 @@
+.banner-container {
+    background-color: black;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  
+  .game-title {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: white;
+  }
+  
+  .game-image {
+    margin-top: 1rem;
+  }
+  
+  .game-button {
+    background-color: transparent;
+    border-color: white;
+    color: white;
+    width: 200px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .game-button:hover {
+    background-color: white;
+    color: black;
+    border-color: white;
+  }
+  
