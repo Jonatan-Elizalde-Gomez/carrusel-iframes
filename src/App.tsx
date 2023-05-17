@@ -1,6 +1,6 @@
 import React from 'react';
-import Slider from './components/Slider/Slider';
-import BannerComponent from './components/banner/Banner';
+import BannerComponent from './components/Banner/Banner';
+import FileUploader from './components/FileUploader/FileUploader';
 
 const App: React.FC = () => {
 
@@ -9,6 +9,7 @@ const App: React.FC = () => {
   <div>
   <h1>Slider Demo</h1>
   <BannerComponent />
+  <FileUploader />
   </div>
   );
   };

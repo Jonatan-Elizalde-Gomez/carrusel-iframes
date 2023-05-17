@@ -1,5 +1,4 @@
 import React from 'react';
-
 const Banner: React.FC = () => {
     return (
         <div className="container banner-container">
@@ -43,6 +42,8 @@ const Banner: React.FC = () => {
               </button>
             </div>
           </div>
+          <div>
+      </div>
         </div>
       );
     };
