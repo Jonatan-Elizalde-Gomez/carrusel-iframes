@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import  { useState } from 'react';
+import { uploadFile } from '../Services/FilesService';
 
 const FileUploadComponent = () => {
+  
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event:any) => {
@@ -13,15 +14,14 @@ const FileUploadComponent = () => {
       const formData = new FormData();
       formData.append('htmlFile', selectedFile);
 
-      axios
-        .post('http://localhost:3000/api/files/upload', formData)
+      uploadFile(formData)
         .then((response) => {
+          console.log(response);
           // Lógica adicional después de la solicitud POST exitosa
-          console.log(response.data);
         })
         .catch((error) => {
-          // Manejo de errores
           console.error(error);
+          // Manejo de errores
         });
     }
   };
