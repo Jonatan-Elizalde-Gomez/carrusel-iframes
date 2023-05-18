@@ -1,6 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-const BASE_URL = 'http://localhost:3000/api';
+const BASE_URL = "http://localhost:3000/api";
 
 export function uploadFile(formData: FormData): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -10,23 +11,22 @@ export function uploadFile(formData: FormData): Promise<any> {
         resolve(response.data);
       })
       .catch((error) => {
-        console.error('Error al cargar el archivo:', error);
-        reject(new Error('Ocurrió un error al cargar el archivo.'));
+        console.error("Error al cargar el archivo:", error);
+        reject(new Error("Ocurrió un error al cargar el archivo."));
       });
   });
 }
 
-
 export function listFiles(): Promise<any> {
-    return new Promise((resolve, reject) => {
-        axios
-          .get(`${BASE_URL}/files/upload/list`)
-          .then((response) => {
-            resolve(response.data);
-          })
-          .catch((error) => {
-            console.error('Error al obtener los datos:', error);
-            reject(new Error('Ocurrió un error al obtener los datos.'));
-        });
-    });
-  }
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${BASE_URL}/files/upload/list`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los datos:", error);
+        reject(new Error("Ocurrió un error al obtener los datos."));
+      });
+  });
+}
