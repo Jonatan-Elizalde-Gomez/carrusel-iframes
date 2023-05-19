@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { listFiles } from "../Services/FilesService";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const GridComponent: React.FC = () => {
   const [links, setLinks] = useState<string[]>([]);
@@ -12,12 +14,13 @@ const GridComponent: React.FC = () => {
         console.log(response.archivos);
       })
       .catch((error) => {
-        console.error(error);
+        toast.error("Error al listar los archivos");
       });
   }, []);
 
   return (
     <div className="container grid__component">
+      <ToastContainer />
       <h2>Latest Featured Games</h2>
       <div className="row">
         {links.map((link, index) => (

@@ -1,13 +1,21 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { uploadFile } from "../Services/FilesService";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDropzone } from 'react-dropzone';
 
 const FileUploadComponent = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleFileChange = (event: any) => {
-    setSelectedFile(event.target.files[0]);
-  };
 
+  const { getRootProps, getInputProps, isDragActive, isDragAccept} = useDropzone({
+    onDrop: (acceptedFiles) => {
+      setSelectedFile(acceptedFiles[0]);
+    },
+  });
+
+
+  
   const handleUpload = () => {
     if (selectedFile) {
       const formData = new FormData();
@@ -16,36 +24,45 @@ const FileUploadComponent = () => {
       uploadFile(formData)
         .then((response) => {
           console.log(response);
-          // Lógica adicional después de la solicitud POST exitosa
+          toast.success("Archivo subido exitosamente");
         })
         .catch((error) => {
           console.error(error);
-          // Manejo de errores
+          toast.error("Error al subir el archivo");
         });
     }
   };
 
   return (
     <div className="container file-uploader__container">
-      <div className="file-uploader__input">
-      <input
-        type="file" 
-        accept=".html" 
-        className="form-control" 
-        placeholder="Files" 
-        aria-label="Files" 
-        aria-describedby="addon-wrapping" 
-        onChange={handleFileChange}
-        required/>
-          </div>
-        <button 
-          className="input-group-text file-uploader__button" 
-          id="addon-wrapping"
-          onClick={handleUpload}
-        >
-          Subir archivo
-        </button>
+      <ToastContainer />
+      <div
+        {...getRootProps()}
+        className="file-uploader__input"
+      >
+        <input {...getInputProps()} />
+        {selectedFile ? (
+          <>
+          <p>File selected: {selectedFile?.name}</p>
+          <button className="btn btn-primary file-uploader__button">Browse Files</button>
+          </>
+        ) : (
+          <>
+            <p>Drag &amp; Drop files here</p>
+            <p>or</p>
+            <button className="btn btn-primary file-uploader__button">Browse Files</button>
+          </>
+        )}
+      </div>
+      <button
+        className="btn btn-primary file-uploader__button"
+        onClick={handleUpload}
+      >
+        Upload File
+      </button>
     </div>
   );
-}
+};
+
+
 export default FileUploadComponent;
